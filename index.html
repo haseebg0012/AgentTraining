@@ -22,12 +22,13 @@
     --radius: 14px;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
+  html{scroll-behavior:smooth; overflow-x:hidden;}
   body{
     background: var(--bg);
     color: var(--text);
     font-family:'Inter', sans-serif;
     overflow-x:hidden;
+    max-width:100vw;
   }
   ::selection{background:var(--signal); color:#04120F;}
 
@@ -134,7 +135,7 @@
   }
 
   /* ---------- Hero ---------- */
-  #hero{padding-top:60px;}
+  #hero{padding-top:120px; justify-content:flex-start;}
   .hero-grid{
     display:grid;
     grid-template-columns:1.1fr 0.9fr;
@@ -425,6 +426,61 @@
     position:absolute;
     top:40px; left:8vw;
   }
+
+  .table-scroll{
+    width:100%;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  .table-scroll table{ min-width:520px; }
+
+  /* ================= RESPONSIVE ================= */
+  @media (max-width:1024px){
+    section{ padding:90px 6vw; }
+  }
+
+  @media (max-width:768px){
+    .sidenav{ display:none; }
+    section{ padding:70px 6vw; min-height:auto; }
+    #hero{ padding-top:56px; }
+    .stat-row{ gap:24px; }
+    .stat-num{ font-size:1.5rem; }
+    .comm-grid{ grid-template-columns:1fr; }
+    .flow-step{ grid-template-columns:44px 1fr; gap:16px; }
+    .flow-dot{ width:34px; height:34px; font-size:12px; }
+    .card-grid{ grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); }
+    .close-loop{ font-size:0.75rem; }
+    .scenario{ grid-template-columns:1fr; gap:8px; }
+    .scenario .q{ display:inline-block; }
+    .section-index{ display:none; }
+    .close-loop{
+      flex-direction:column;
+      align-items:center;
+      gap:6px;
+      overflow-x:visible;
+    }
+    .close-loop .arrow{ transform:rotate(90deg); }
+    .close-loop span.node{ width:auto; }
+  }
+
+  @media (max-width:480px){
+    section{ padding:56px 6vw; }
+    .eyebrow{ font-size:11px; }
+    .sub{ font-size:0.92rem; }
+    .stat-row{ gap:18px; }
+    .pulse-wrap{ max-width:280px; margin:0 auto; }
+    .pulse-node{ width:42px; height:42px; }
+    .pulse-node svg{ width:18px; height:18px; }
+    .pulse-node.center{ width:70px; height:70px; }
+    .pulse-node.center svg{ width:28px; height:28px; }
+    .info-card{ padding:16px; }
+    .comm-card{ padding:18px; }
+    .comm-amount{ font-size:1.4rem; }
+    .tabs{ gap:8px; }
+    .tab-btn{ padding:8px 14px; font-size:0.8rem; }
+    th, td{ padding:9px 10px; font-size:0.85rem; }
+    .form-note{ flex-direction:column; padding:16px 18px; }
+  }
 </style>
 </head>
 <body>
@@ -502,8 +558,9 @@
     <div class="flow-step">
       <div class="flow-line"><div class="flow-dot">2</div></div>
       <div class="flow-body">
-        <h3>Customer inboxes you</h3>
-        <p>Interested people message you directly. This is your lead, bring the conversation into FB inbox and keep it there.</p>
+        <h3>Watch comments AND message requests</h3>
+        <p>Customers reach out two ways: they comment directly on your post, or they message you and it lands in your <b style="color:var(--signal)">Message Requests</b> folder, not your main inbox. Check your post's comments and your message requests constantly after posting.</p>
+        <span class="flow-tag">Reply fast, a slow reply loses the customer</span>
       </div>
     </div>
     <div class="flow-step">
@@ -524,29 +581,36 @@
     <div class="flow-step">
       <div class="flow-line"><div class="flow-dot">5</div></div>
       <div class="flow-body">
-        <h3>Collect basic info</h3>
-        <p>Take First &amp; Last Name, WhatsApp Number, Email Address, and DOB directly from the customer.</p>
+        <h3>Collect basic info, right in chat</h3>
+        <p>Customer stays in the inbox, they don't fill anything themselves. You ask and note down First &amp; Last Name, WhatsApp Number, Email Address, and DOB.</p>
       </div>
     </div>
     <div class="flow-step">
       <div class="flow-line"><div class="flow-dot">6</div></div>
       <div class="flow-body">
-        <h3>Send the Google Form</h3>
-        <p>Share the Google Form with the customer. They fill in their name and the package they're interested in.</p>
+        <h3>Tell the customer: department will message them</h3>
+        <p>Let them know someone from the <b style="color:var(--signal)">Setup &amp; Verification Department</b> will message them shortly. When that message lands, the customer replies to confirm and finalize the order.</p>
       </div>
     </div>
     <div class="flow-step">
       <div class="flow-line"><div class="flow-dot">7</div></div>
       <div class="flow-body">
-        <h3>Hand off to the department</h3>
-        <p>Tell the customer someone from the <b style="color:var(--signal)">Setup &amp; Verification Department</b> will message them shortly. When that message lands, the customer replies to confirm and finalize the order.</p>
+        <h3>You fill and submit the Google Form</h3>
+        <p>The customer never touches the form. You fill it yourself with the customer's info, the package they're interested in, and your own name, then submit it.</p>
       </div>
     </div>
     <div class="flow-step">
       <div class="flow-line"><div class="flow-dot">8</div></div>
       <div class="flow-body">
-        <h3>Follow up, always</h3>
-        <p>Stay in touch after the sale. Check they're set up fine, and keep the relationship warm for renewal time.</p>
+        <h3>Update the WhatsApp group</h3>
+        <p>Right after submitting the form, post the customer's name in the WhatsApp group so the new sale gets logged on the sheet.</p>
+      </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-line"><div class="flow-dot">9</div></div>
+      <div class="flow-body">
+        <h3>Track it, then follow up</h3>
+        <p>Keep an eye on the group for confirmation that your customer's order is done. Follow up with the customer directly, and keep your own sale on your radar until it's marked complete.</p>
         <span class="flow-tag">Renewal commission depends on this</span>
       </div>
     </div>
@@ -557,8 +621,8 @@
 <section id="data">
   <div class="section-index">02</div>
   <div class="eyebrow">What you collect from the customer</div>
-  <h2>Two hand offs: basic info, then the form.</h2>
-  <p class="sub">Once the deal is agreed, you collect this directly in chat before anything goes to the department.</p>
+  <h2>You collect it, you submit it.</h2>
+  <p class="sub">Once the deal is agreed, you get this directly in chat. The customer never fills anything themselves.</p>
 
   <div class="card-grid">
     <div class="info-card">
@@ -585,7 +649,7 @@
 
   <div class="form-note">
     <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-    <p>After basic info is collected, send the <b>Google Form</b>. The customer fills in their name and the package they're interested in. This is separate from the department hand off, and it's what confirms their package choice in writing.</p>
+    <p>The customer never fills a form. You take this info in chat, then fill the <b>Google Form</b> yourself with the customer's details, the package they're interested in, and your own name, and submit it.</p>
   </div>
 </section>
 
@@ -631,12 +695,14 @@
   </div>
 
   <div class="tab-panel active" id="gv">
+    <div class="table-scroll">
     <table>
       <thead>
         <tr><th>Country</th><th>1 User</th><th>3 to 5 Users</th></tr>
       </thead>
       <tbody id="gv-body"></tbody>
     </table>
+    </div>
     <div class="price-note">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
       UK 1 user package comes with a USA number. New Zealand is 3 to 5 users only.
@@ -644,12 +710,14 @@
   </div>
 
   <div class="tab-panel" id="other">
+    <div class="table-scroll">
     <table>
       <thead>
         <tr><th>Platform</th><th>Price</th></tr>
       </thead>
       <tbody id="other-body"></tbody>
     </table>
+    </div>
     <div class="price-note">
       <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
       Cisco Jabber is specifically for UAE, Dubai and Gulf clients. ViciDialer &amp; VOIP is priced in USD, not PKR.
@@ -685,6 +753,10 @@
       <span class="q">Deal is done, then silence</span>
       <p class="a">Don't stop at confirmation. Keep the follow up going so you know the customer is set up properly, and so you're first in line when it's <b>renewal time</b>.</p>
     </div>
+    <div class="scenario">
+      <span class="q">Sale logged, then what</span>
+      <p class="a">After you post the sale in the WhatsApp group, keep checking it for the update on whether your customer's order is marked <b>done</b>. Follow up on the customer and on your own sale status at the same time, don't let either one slip.</p>
+    </div>
   </div>
 </section>
 
@@ -695,11 +767,11 @@
   <p class="sub" style="margin-left:auto; margin-right:auto;">That's the whole job. Every step you run properly is commission in your pocket, and every follow up you keep is commission next month too.</p>
   <div class="close-loop">
     <span class="node">FB Post</span><span class="arrow">→</span>
-    <span class="node">Inbox</span><span class="arrow">→</span>
+    <span class="node">Comments + Requests</span><span class="arrow">→</span>
     <span class="node">Pitch</span><span class="arrow">→</span>
     <span class="node">Deal</span><span class="arrow">→</span>
-    <span class="node">Info + Form</span><span class="arrow">→</span>
-    <span class="node">Department</span><span class="arrow">→</span>
+    <span class="node">Info in Chat</span><span class="arrow">→</span>
+    <span class="node">Form + Sheet</span><span class="arrow">→</span>
     <span class="node">Follow up</span><span class="arrow">↻</span>
   </div>
 </section>
